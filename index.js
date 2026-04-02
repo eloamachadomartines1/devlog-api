@@ -1,59 +1,35 @@
 import express from 'express';
 const app = express();
-
-app.use(express.json());
+app.use(express.json()); //para o express lidar com json
 
 const port = 3030;
 
+//"Banco" em memória - array de projetos
+let projects =[];
 
-app.get('/', (req, res) =>{
-    res.json({"mensagem": "Olá, mundo!"});
-    console.log(req);
-})
-
-app.post('/projects', (req, res) => {
-    const {title, description} = req.body;//desestruturação
-    if(!title){
-        return res.status(400).json({error:'O campo title é obrigatorio'})
-    }
-    const newProject ={
-        id: Date.now().toString(),
-        title: title,
-        description:description ||'',
-        createAd: new Date().toISOString()
-    };
-    res.status(201).json(newProject)
-})
-
-app.get('/projects', (req, res) => {
-    const {page = 1, limit = 10, status} = req.query;
-    //VAlores padrao via desestruturação
-    const pageNum = parseInt(page);
-    const limitNum = parseInt(limit)
-
+//GET /api/v1/projects - listar todos
+app.get('/api/v1/projects', (req, res) =>{
     res.json({
-        page: pageNum,
-        limit: limitNum,
-        status: status || 'todos',
-        message: `Página ${pageNum} de projetos com ${limitNum} itens`
-    })
+        projects,
+        total:projects.length})
+});
+
+//Post /api/v1/projects - criar novo projeto 
+app.post('/api/v1/projects', (req, res) => {
+    const {title, description} = req.body;
+    if(!title){
+        return res.status(400).json({ error: "o campo title é obrigatorio"})
+    } 
+    const projects = {
+        id: Date.now().toString(),
+        title, title,
+        description: description || '',
+        createAd: new Date().toISOString()
+    }
+    projects.push(project)
+    res.status(201).json(projetc)
 })
 
-//Rota com parâmetro dinamico
-app.get('/projects/:id',(req, res) =>{
-    const {id} = req.params //desestruturação
-    res.json({mensagem: `Busncando projeto ${id}`, id})
-})
-
-
-//Rota com múltiplos parametros
-app.get('projects/:projectId/logs/:logId', (req, res) =>{
-    const{projectId, logId} = req.params;
-    res.json({projectId, logId})
-})
-
-
-app.listen(port, () =>{
-    let data = new Date();
-    console.log(`Servidor iniciado em ${data}`);
-})
+//GET /api/v1/projects/:id - atualizar
+app.patch('/api/v1//projects')
+ 
