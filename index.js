@@ -31,5 +31,7 @@ app.post('/api/v1/projects', (req, res) => {
 })
 
 //GET /api/v1/projects/:id - atualizar
-app.patch('/api/v1//projects')
+app.patch('/api/v1//projects/:id',(req, res) => {
+    const projects
+})
  
