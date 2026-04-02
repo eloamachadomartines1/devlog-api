@@ -1,6 +1,7 @@
 import express from 'express';
 const app = express();
 
+app.use(express.json());
 
 const port = 3030;
 
@@ -8,6 +9,20 @@ const port = 3030;
 app.get('/', (req, res) =>{
     res.json({"mensagem": "Olá, mundo!"});
     console.log(req);
+})
+
+app.post('/projects', (req, res) => {
+    const {title, description} = req.body;//desestruturação
+    if(!title){
+        return res.status(400).json({error:'O campo title é obrigatorio'})
+    }
+    const newProject ={
+        id: Date.now().toString(),
+        title: title,
+        description:description ||'',
+        createAd: new Date().toISOString()
+    };
+    res.status(201).json(newProject)
 })
 
 app.get('/projects', (req, res) => {
