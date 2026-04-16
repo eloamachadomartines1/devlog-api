@@ -1,37 +1,15 @@
-import express from 'express';
-const app = express();
-app.use(express.json()); //para o express lidar com json
-
+import express from 'express'
+import projectRoutes from './routes/projectsRoutes.js'
+const app = express()
+app.use(express.json())//Para o express lidra com json
 const port = 3030;
 
-//"Banco" em memória - array de projetos
-let projects =[];
+app.use('/api/v1/projects', projectRoutes);
 
-//GET /api/v1/projects - listar todos
-app.get('/api/v1/projects', (req, res) =>{
-    res.json({
-        projects,
-        total:projects.length})
-});
-
-//Post /api/v1/projects - criar novo projeto 
-app.post('/api/v1/projects', (req, res) => {
-    const {title, description} = req.body;
-    if(!title){
-        return res.status(400).json({ error: "o campo title é obrigatorio"})
-    } 
-    const projects = {
-        id: Date.now().toString(),
-        title, title,
-        description: description || '',
-        createAd: new Date().toISOString()
-    }
-    projects.push(project)
-    res.status(201).json(projetc)
+app.get('/health', (req, res) =>{
+    res.json({satus: "OK"})
 })
 
-//GET /api/v1/projects/:id - atualizar
-app.patch('/api/v1//projects/:id',(req, res) => {
-    const projects
+app.listen(port,() =>{
+    console.log(`Servidor iniciado em $`)
 })
- 
