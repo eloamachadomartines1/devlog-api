@@ -1,4 +1,6 @@
-import { Router } from "express";
+import { Router } from 'express';
+import { validateProjects } from "../middlewares/validateProject";
+
 const router = Router();
 
 //Banco em Memória - array de projetos
@@ -7,6 +9,7 @@ let projects = [
     { id: 1002, title: "Um projeto Qualquer", description: "iniciado", createdAt: "" },
     { id: 1003, title: "Projeto Top", description: "iniciado", createdAt: "" }
 ];
+
 
 //GET /api/v1/projects - listar todos os projetos
 router.get('/', (req, res) => {
