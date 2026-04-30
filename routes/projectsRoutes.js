@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { validateProjects } from "../middlewares/validateProject";
+import { validateProjects } from '../middlewares/validateProject';
 
 const router = Router();
 
@@ -20,11 +20,8 @@ router.get('/', (req, res) => {
 });
 
 //POST /api/v1/projects - criar novo projeto
-router.post('/', (req, res) => {
+router.post('/', validateProjects, (req, res) => {
     const { title, description } = req.body;
-    if (!title) {
-        return res.status(400).json({ error: "o campo title é obrigatório" });
-    }
     const project = {
         id: parseInt(Date.now().toString()),
         title: title,
@@ -46,7 +43,7 @@ router.get('/:id', (req, res) => {
 });
 
 //PATCH /api/v1/projects/:id - atualizar projeto
-router.patch('/:id', (req, res) => {
+router.patch('/:id', validateProjects, (req, res) => {
     const { id } = req.params;
     const index = projects.findIndex(p => p.id === parseInt(id));
     if (index === -1) {

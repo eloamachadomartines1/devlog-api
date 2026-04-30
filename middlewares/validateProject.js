@@ -1,5 +1,3 @@
-//middlewares/validateProjects.js
-
 export function validateProjects(req, res, next) {
     const { title, description } = req.body;
 
