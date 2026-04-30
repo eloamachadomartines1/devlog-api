@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { validateProjects } from '../middlewares/validateProject';
-
+import { validateProjects } from '../middlewares/validateProject.js';
 const router = Router();
 
 //Banco em Memória - array de projetos
