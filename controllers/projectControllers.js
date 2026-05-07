@@ -1,6 +1,4 @@
-import {
-    listProjects, createProject, getProjectById, updateProject,
-    deleteProject
+import { listProjects, createProject, getProjectById, updateProject, deleteProject
 } from '../services/projectService.js'
 
 export async function list(req, res, next) {
