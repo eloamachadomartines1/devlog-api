@@ -9,15 +9,15 @@ import { authenticate } from '../middlewares/authenticate.js';
 router.get('/', list);
 
 // POST /api/v1/projects
-router.post('/', validateProject, create);
+router.post('/', authenticate, validateProject, create);
 
 // GET /api/v1/projects/:id
 router.get('/:id', getById);
 
 // PATCH /api/v1/projects/:id
-router.patch('/:id', validateProject, update);
+router.patch('/:id', authenticate, validateProject, update);
 
 // DELETE /api/v1/projects/:id
-router.delete('/:id', remove);
+router.delete('/:id', authenticate, remove);
 
 export default router
