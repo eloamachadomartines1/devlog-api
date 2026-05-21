@@ -1,12 +1,18 @@
+import 'dotenv/config'
 import express from 'express'
 import projectRoutes from './routes/projectsRoutes.js'
 import morgan from 'morgan'
+import { login } from './controllers/authController.js'
+
 const app = express()
 
-app.use(express.json())//Para o express lidra com json
+app.use(express.json())//Para o express lidar com json
 const port = 3030;
 
 app.use(morgan('dev'));
+
+app.post('/auth/login', login);
+
 app.use('/api/v1/projects', projectRoutes);
 
 app.get('/health', (req, res) =>{

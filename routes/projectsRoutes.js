@@ -3,6 +3,7 @@ import { validateProject } from '../middlewares/validateProject.js';
 import { list, create, getById, update, remove } from '../controllers/projectController.js';
 const router = Router();
 
+import { authenticate } from '../middlewares/authenticate.js';
 
 // GET /api/v1/projects
 router.get('/', list);
